@@ -102,3 +102,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# database
+*.sqlite3
+
+# File explorer
+.DS_Store

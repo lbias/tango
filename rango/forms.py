@@ -1,6 +1,6 @@
 from django import forms
 
-from rango.models import Page, Category, UserProfile
+from rango.models import Page, Category
 
 
 class CategoryForm(forms.ModelForm):

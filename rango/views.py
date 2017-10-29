@@ -197,9 +197,9 @@ def user_login(request):
             print("Invalid login details: {0}, {1}".format(username, password)) 
             return HttpResponse("Invalid login details supplied.")
         
-        # The request is not a HTTP POST, so display the login form. 
-        # This scenario would most likely be a HTTP GET.
-        else:
-            # No context variables to pass to the template system, hence the 
-            # blank dictionary object...
-            return render(request, 'rango/login.html', {})
+    # The request is not a HTTP POST, so display the login form. 
+    # This scenario would most likely be a HTTP GET.
+    else:
+        # No context variables to pass to the template system, hence the 
+        # blank dictionary object...
+        return render(request, 'rango/login.html', {})

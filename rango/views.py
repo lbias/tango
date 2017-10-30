@@ -20,8 +20,14 @@ def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
     page_list = Page.objects.order_by('-views')[:5]
     context_dict = {'categories': category_list, 'pages': page_list}
-    # Render the response and send it back!
-    return render(request, 'rango/index.html', context_dict)
+    # Call function to handle the cookies
+    visitor_cookie_handler(request)
+    # pass the number of visits to the context dictionary
+    context_dict['visits'] = request.session['visits']
+    # Obtain our Response object early so we can add cookie information.
+    response = render(request, 'rango/index.html', context=context_dict)    
+    # Return response back to the user, updating any cookies that need changed.
+    return response
 
 
 def about(request):
@@ -223,6 +229,14 @@ def user_logout(request):
     logout(request)
     # Take the user back to the homepage.
     return HttpResponseRedirect(reverse('index'))
+
+
+# A helper method
+def get_server_side_cookie(request, cookie, default_val=None): 
+    val = request.session.get(cookie)
+    if not val:
+        val = default_val 
+    return val
 
 
 def visitor_cookie_handler(request):
